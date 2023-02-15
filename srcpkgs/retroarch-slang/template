@@ -1,5 +1,5 @@
 # Template file for 'retroarch'
-pkgname=retroarch
+pkgname=retroarch-slang
 version=1.14.0
 revision=1
 build_style=configure
