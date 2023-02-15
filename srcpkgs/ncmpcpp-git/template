@@ -1,0 +1,30 @@
+# Template file for 'ncmpcpp'
+pkgname=ncmpcpp-git
+version=23.1.7
+revision=1
+wrksrc=ncmpcpp-master
+build_style=gnu-configure
+configure_args=" BOOST_LIB_SUFFIX= --enable-clock --enable-outputs
+ --enable-unicode --enable-visualizer --with-curl --with-taglib --with-fftw"
+hostmakedepends="pkg-config"
+makedepends="boost-devel fftw-devel icu-devel libcurl-devel libmpdclient-devel
+ readline-devel taglib-devel libtool autoconf automake"
+short_desc="Ncurses mpd client inspired by ncmpc"
+maintainer="cinerea0 <cinerea0@protonmail.com>"
+license="GPL-2.0-or-later"
+homepage="https://rybczak.net/ncmpcpp"
+distfiles="https://github.com/ncmpcpp/ncmpcpp/archive/refs/heads/master.zip"
+checksum=b210ed522bc497e200bdfda537c503a3edae0e3aa3d8aa48b750997bf9878187
+
+# Required by waddwstr() with ncurses on musl
+CXXFLAGS="-D_XOPEN_SOURCE=600"
+
+pre_configure() {
+	./autogen.sh
+	vsed -e '/^docdir/d' -i {,doc/}Makefile.in
+}
+
+post_install() {
+	vsconf doc/bindings
+	vsconf doc/config
+}
