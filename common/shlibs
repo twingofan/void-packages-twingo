@@ -954,7 +954,7 @@ libsuil-0.so.0 suil-0.6.4_1
 libmcpp.so.0 libmcpp-2.7.2_1
 libjitterentropy.so.3 jitterentropy-3.0.0_1
 libkdecorations2.so.5 kdecoration-5.8.4_1
-libkdecorations2private.so.9 kdecoration-5.23.0_1
+libkdecorations2private.so.10 kdecoration-5.26.90_1
 libGlacier2.so.37 libIce-3.7.5_2
 libGlacier2CryptPermissionsVerifier.so.37 libIce-3.7.5_2
 libIce.so.37 libIce-3.7.5_2
@@ -2522,7 +2522,8 @@ libosgUtil.so.161 osg-3.6.5_1
 libosgVolume.so.161 osg-3.6.5_1
 libosgGA.so.161 osg-3.6.5_1
 libosgPresentation.so.161 osg-3.6.5_1
-libKF5Screen.so.7 libkscreen-5.7.5_1
+libKF5Screen.so.8 libkscreen-5.26.90_1
+libKF5ScreenDpms.so.8 libkscreen-5.26.90_1
 libdbusmenu-qt5.so.2 libdbusmenu-qt5-0.9.3.0_1
 libKF5Solid.so.5 libksolid-5.15.0_2
 libfreeimage.so.3 freeimage-3.17.0_1
