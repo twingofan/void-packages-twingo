@@ -1,7 +1,7 @@
 # Template file for 'chatterino2'
 pkgname=chatterino2
 version=2.3.5
-revision=1
+revision=2
 _libcommuni_commit="a7b32cd6fa0640721b6114b31d37d79ebf832411"
 _serialize_commit="7d37cbfd5ac3bfbe046118e1cec3d32ba4696469"
 _settings_commit="04792d853c7f83c9d7ab4df00279442a658d3be3"
@@ -34,7 +34,6 @@ checksum="f1fff3523f5a3f633430d44f7ca6c6c718a515258d50004a855e69e4aa989b4e
  f9cf386638f455c5d2e7a835b95941201387d2531b8682942d59827663b58341"
 
 if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
-	makedepends+=" libatomic-devel"
 	LIBS="-latomic"
 fi
 
