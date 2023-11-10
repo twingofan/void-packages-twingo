@@ -1,0 +1,22 @@
+# Template file for 'xsimd'
+pkgname=xsimd
+version=11.2.0
+revision=1
+build_style=cmake
+checkdepends="doctest-devel"
+short_desc="C++ wrappers for SIMD intrinsics and parallelized, optimized mathematical functions"
+maintainer="John <me@johnnynator.dev>"
+license="BSD-3-Clause"
+homepage="https://github.com/xtensor-stack/xsimd"
+distfiles="https://github.com/xtensor-stack/xsimd/archive/refs/tags/${version}.tar.gz"
+checksum=509bbfe12e78ee1a0e81711019e7c7a372dabcff566dbf15b95cc94339443242
+
+if [ "$XBPS_CHECK_PKGS" ]; then
+	configure_args="-DBUILD_TESTS=ON"
+else
+	configure_args="-DBUILD_TESTS=OFF"
+fi
+
+post_install() {
+	vlicense LICENSE
+}

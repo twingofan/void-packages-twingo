@@ -1,6 +1,6 @@
 # Template file for 'khtml'
 pkgname=khtml
-version=5.108.0
+version=5.111.0
 revision=1
 build_style=cmake
 configure_args="-DDESKTOPTOJSON_EXECUTABLE=/usr/bin/desktoptojson"
@@ -12,7 +12,7 @@ maintainer="John <me@johnnynator.dev>"
 license="LGPL-2.0-or-later"
 homepage="https://invent.kde.org/frameworks/khtml"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/portingAids/${pkgname}-${version}.tar.xz"
-checksum=5b4ed49a5fc0a3e657503a4d4d010acd158f23233b46a302926d45d7e7eb5a4d
+checksum=fdbbecf23cff80b125cb2b9b7869f8a09bd371aa5e04ba83957807eb85e7577f
 
 khtml-devel_package() {
 	short_desc+=" - development"

@@ -1,6 +1,6 @@
 # Template file for 'kitemviews'
 pkgname=kitemviews
-version=5.108.0
+version=5.111.0
 revision=1
 build_style=cmake
 configure_args="-DBUILD_DESIGNERPLUGIN=ON"
@@ -12,7 +12,7 @@ maintainer="John <me@johnnynator.dev>"
 license="LGPL-2.0-only, LGPL-2.0-or-later"
 homepage="https://invent.kde.org/frameworks/kitemviews"
 distfiles="${KDE_SITE}/frameworks/${version%.*}/${pkgname}-${version}.tar.xz"
-checksum=6177eeaf6bf92da89511b18a4b720ce1454fed9a9f49d75ed0dc6c4a00f2ac8d
+checksum=db1fedb5604aab02ef28584b6a609a12414b6fe7db26c97624f6381598a8d183
 
 kitemviews-devel_package() {
 	short_desc+=" - development"
