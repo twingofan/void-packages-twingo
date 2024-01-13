@@ -1,12 +1,13 @@
 # Template file for 'plocate'
 pkgname=plocate
-version=1.1.19
+version=1.1.21
 revision=1
 build_style=meson
 configure_args="
- -Dinstall_systemd=false
- -Dupdatedb_progname=pupdatedb
- -Dlocategroup=_plocate"
+ -Dinstall_systemd=true
+ -Dlocategroup=_plocate
+ -Dsystemunitdir=/usr/lib/systemd/system
+ -Dupdatedb_progname=pupdatedb"
 hostmakedepends="pkg-config"
 makedepends="libzstd-devel liburing-devel"
 short_desc="Much faster locate based on posting lists"
@@ -15,7 +16,7 @@ license="GPL-2.0-or-later"
 homepage="https://plocate.sesse.net/"
 changelog="https://git.sesse.net/?p=plocate;a=blob_plain;f=NEWS;hb=HEAD"
 distfiles="https://plocate.sesse.net/download/plocate-${version}.tar.gz"
-checksum=d95bc8ee8a9f79b9f69ce63df53fb85b202139f243bbb84c399555eda22e6165
+checksum=0de6b53bec57fbdab1b8b531943e612526ca51167cb06b58e4a71c471187d3ac
 
 system_accounts="_plocate"
 
