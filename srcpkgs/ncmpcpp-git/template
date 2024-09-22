@@ -1,6 +1,6 @@
 # Template file for 'ncmpcpp'
 pkgname=ncmpcpp-git
-version=23.1.7
+version=23.30.8
 revision=1
 wrksrc=ncmpcpp-master
 build_style=gnu-configure
