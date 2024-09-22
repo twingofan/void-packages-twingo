@@ -1,0 +1,400 @@
+From 54074824adb05da42c03d7adfbba94d8e24982f0 Mon Sep 17 00:00:00 2001
+From: corubba <corubba@gmx.de>
+Date: Fri, 8 Mar 2024 16:20:12 +0100
+Subject: [PATCH 1/3] Use PyParsing snake_case names
+
+PyParsing has adopted PEP-8. Replaced all the compatibility synonyms
+with the new snake_case names.
+---
+ console                                   |  2 --
+ docs/_sources/download.txt                |  2 +-
+ docs/download.html                        |  2 +-
+ docsrc/download.txt                       |  2 +-
+ puddlestuff/actiondlg.py                  |  6 ++--
+ puddlestuff/audio_filter.py               | 34 ++++++++++----------
+ puddlestuff/findfunc.py                   | 39 +++++++++++------------
+ puddlestuff/tagsources/mp3tag/__init__.py |  6 ++--
+ puddletag                                 |  2 +-
+ 9 files changed, 47 insertions(+), 48 deletions(-)
+
+diff --git a/console b/console
+index 602420b1..55f7555e 100644
+--- a/console
++++ b/console
+@@ -290,8 +290,6 @@ def main():
+                'format': Format}
+     options, actions = parseoptions(classes)
+     files = options.filename
+-    identifier = QuotedString('"') | Combine(NotAny('\\') + Word(alphanums + ' !"#$%&\'()*+-./:;<=>?@[\\]^_`{|}~'))
+-    tags = delimitedList(identifier)
+     commands = []
+     for command, args in [list(action.items())[0] for action in actions]:
+         # Instantiate the class for the command
+diff --git a/docs/_sources/download.txt b/docs/_sources/download.txt
+index a4c0c8ce..9e01b3e1 100644
+--- a/docs/_sources/download.txt
++++ b/docs/_sources/download.txt
+@@ -21,7 +21,7 @@ Install instructions follow below.
+ 
+ +   At least `Python 3.8<http://python.org>`_
+ +   `PyQt5<http://www.riverbankcomputing.co.uk/software/pyqt/intro>`_ for the GUI.
+-+   `PyParsing (≥1.5.1) <http://pyparsing.wikispaces.com>`_ takes care of the parsing...
+++   `PyParsing (≥3.0) <https://pypi.org/project/pyparsing/>`_ mtakes care of the parsing...
+ +   `Mutagen (≥1.45) <http://code.google.com/p/mutagen/>`_ is used as the tagging lib and...
+ +   `Chromaprint (≥ 0.4) <http://acoustid.org/chromaprint>`_ (optional) for AcoustID support.
+ 
+diff --git a/docs/download.html b/docs/download.html
+index 3a3e1887..8b35b3f2 100644
+--- a/docs/download.html
++++ b/docs/download.html
+@@ -93,7 +93,7 @@ <h1>Download<a class="headerlink" href="#download" title="Permalink to this head
+ <ul class="simple">
+ <li><p>At least <a href="#id6"><span class="problematic" id="id7">`Python 3.8&lt;http://python.org&gt;`_</span></a></p></li>
+ <li><p><a href="#id8"><span class="problematic" id="id9">`PyQt5&lt;http://www.riverbankcomputing.co.uk/software/pyqt/intro&gt;`_</span></a> for the GUI.</p></li>
+-<li><p><a class="reference external" href="http://pyparsing.wikispaces.com">PyParsing (≥1.5.1)</a> takes care of the parsing…</p></li>
++<li><p><a class="reference external" href="https://pypi.org/project/pyparsing/">PyParsing (≥3.0)</a> takes care of the parsing…</p></li>
+ <li><p><a class="reference external" href="http://code.google.com/p/mutagen/">Mutagen (≥1.45)</a> is used as the tagging lib and…</p></li>
+ <li><p><a class="reference external" href="http://acoustid.org/chromaprint">Chromaprint (≥ 0.4)</a> (optional) for AcoustID support.</p></li>
+ </ul>
+diff --git a/docsrc/download.txt b/docsrc/download.txt
+index a4c0c8ce..9e01b3e1 100644
+--- a/docsrc/download.txt
++++ b/docsrc/download.txt
+@@ -21,7 +21,7 @@ Install instructions follow below.
+ 
+ +   At least `Python 3.8<http://python.org>`_
+ +   `PyQt5<http://www.riverbankcomputing.co.uk/software/pyqt/intro>`_ for the GUI.
+-+   `PyParsing (≥1.5.1) <http://pyparsing.wikispaces.com>`_ takes care of the parsing...
+++   `PyParsing (≥3.0) <https://pypi.org/project/pyparsing/>`_ mtakes care of the parsing...
+ +   `Mutagen (≥1.45) <http://code.google.com/p/mutagen/>`_ is used as the tagging lib and...
+ +   `Chromaprint (≥ 0.4) <http://acoustid.org/chromaprint>`_ (optional) for AcoustID support.
+ 
+diff --git a/puddlestuff/actiondlg.py b/puddlestuff/actiondlg.py
+index 5b1f2964..7d2147e5 100644
+--- a/puddlestuff/actiondlg.py
++++ b/puddlestuff/actiondlg.py
+@@ -8,7 +8,7 @@
+ from PyQt5.QtWidgets import QAbstractItemView, QAction, QApplication, QCheckBox, QComboBox, QCompleter, \
+     QDialog, QFrame, QGridLayout, QInputDialog, QLabel, QLineEdit, QListWidgetItem, QMenu, QMessageBox, \
+     QScrollArea, QSizePolicy, QSpinBox, QStackedWidget, QToolButton, QVBoxLayout, QWidget
+-from pyparsing import delimitedList, alphanums, Combine, Word, QuotedString
++from pyparsing import delimited_list, alphanums, Combine, Word, QuotedString
+ 
+ from . import findfunc, functions
+ from . import functions_dialogs
+@@ -186,7 +186,7 @@ def __init__(self, funcname, selected_fields=False, userargs=None,
+         QWidget.__init__(self, parent)
+         identifier = QuotedString('"') | Combine(Word
+                                                  (alphanums + ' !"#$%&\'()*+-./:;<=>?@[\\]^_`{|}~'))
+-        tags = delimitedList(identifier)
++        tags = delimited_list(identifier)
+         self.func = Function(funcname)
+         docstr = self.func.doc[1:]
+         self.vbox = QVBoxLayout()
+@@ -236,7 +236,7 @@ def __init__(self, funcname, selected_fields=False, userargs=None,
+         # Loop that creates all the controls
+         self.controls = []
+         for argno, line in enumerate(docstr):
+-            args = tags.parseString(line)
++            args = tags.parse_string(line)
+             label = args[0]
+             ctype = args[1]
+             default = args[2:]
+diff --git a/puddlestuff/audio_filter.py b/puddlestuff/audio_filter.py
+index 2e047fa4..96ce1598 100644
+--- a/puddlestuff/audio_filter.py
++++ b/puddlestuff/audio_filter.py
+@@ -2,7 +2,9 @@
+ import logging
+ import re
+ 
+-from pyparsing import *
++from pyparsing import (CaselessLiteral, Combine, OpAssoc,
++                       QuotedString, Word, alphanums, infix_notation)
++
+ 
+ from . import findfunc, audioinfo
+ from .puddleobjects import gettaglist
+@@ -163,31 +165,31 @@ def __bool__(self):
+ 
+ 
+ bool_exprs = [
+-    (CaselessLiteral("missing"), 1, opAssoc.RIGHT, Missing),
+-    (CaselessLiteral("present"), 1, opAssoc.RIGHT, Present),
+-    (CaselessLiteral("greater"), 2, opAssoc.LEFT, Greater),
+-    (CaselessLiteral("less"), 2, opAssoc.LEFT, Less),
+-    (CaselessLiteral("equal"), 2, opAssoc.LEFT, Equal),
+-    (CaselessLiteral("has"), 2, opAssoc.LEFT, Has),
+-    (CaselessLiteral("matches"), 2, opAssoc.LEFT, Matches),
+-    (CaselessLiteral("is"), 2, opAssoc.LEFT, BoolIs),
+-    (CaselessLiteral("and"), 2, opAssoc.LEFT, BoolAnd),
+-    (CaselessLiteral("or"), 2, opAssoc.LEFT, BoolOr),
+-    (CaselessLiteral("not"), 1, opAssoc.RIGHT, BoolNot),
++    (CaselessLiteral("missing"), 1, OpAssoc.RIGHT, Missing),
++    (CaselessLiteral("present"), 1, OpAssoc.RIGHT, Present),
++    (CaselessLiteral("greater"), 2, OpAssoc.LEFT,  Greater),
++    (CaselessLiteral("less"),    2, OpAssoc.LEFT,  Less),
++    (CaselessLiteral("equal"),   2, OpAssoc.LEFT,  Equal),
++    (CaselessLiteral("has"),     2, OpAssoc.LEFT,  Has),
++    (CaselessLiteral("matches"), 2, OpAssoc.LEFT,  Matches),
++    (CaselessLiteral("is"),      2, OpAssoc.LEFT,  BoolIs),
++    (CaselessLiteral("and"),     2, OpAssoc.LEFT,  BoolAnd),
++    (CaselessLiteral("or"),      2, OpAssoc.LEFT,  BoolOr),
++    (CaselessLiteral("not"),     1, OpAssoc.RIGHT, BoolNot),
+ ]
+ 
+ field_expr = Combine('%' + Word(alphanums + '_') + '%')
+-tokens = QuotedString('"', unquoteResults=False) \
++tokens = QuotedString('"', unquote_results=False) \
+          | field_expr | Word(alphanums + '_')
+-bool_expr = infixNotation(tokens, bool_exprs)
+-bool_expr.enablePackrat()
++bool_expr = infix_notation(tokens, bool_exprs)
++bool_expr.enable_packrat()
+ 
+ 
+ def parse(audio, expr):
+     for i in bool_exprs:
+         i[3].audio = audio
+     try:
+-        res = bool_expr.parseString(expr)[0]
++        res = bool_expr.parse_string(expr)[0]
+     except ParseException as e:
+         res = expr
+     if isinstance(res, str):
+diff --git a/puddlestuff/findfunc.py b/puddlestuff/findfunc.py
+index 8e35762a..bd73bb62 100755
+--- a/puddlestuff/findfunc.py
++++ b/puddlestuff/findfunc.py
+@@ -8,10 +8,9 @@
+ from decimal import Decimal
+ from functools import partial
+ 
+-from pyparsing import (Word, alphas, Literal, OneOrMore, alphanums,
+-                       nums, delimitedList, Combine, QuotedString,
+-                       CharsNotIn, originalTextFor, nestedExpr,
+-                       Optional)
++from pyparsing import (CharsNotIn, Combine, Literal, OneOrMore, Optional,
++                       QuotedString, Word, alphanums, alphas, delimited_list, nested_expr,
++                       nums, original_text_for)
+ 
+ from . import audioinfo
+ from .constants import ACTIONDIR, CHECKBOX, SEPARATOR, SPINBOX, SYNTAX_ERROR, SYNTAX_ARG_ERROR
+@@ -213,10 +212,10 @@ def func_tokens(dictionary, parse_action):
+     func_name = Word(alphas + '_', alphanums + '_')
+ 
+     func_ident = Combine('$' + func_name.copy()('funcname'))
+-    func_tok = func_ident + originalTextFor(nestedExpr())('args')
+-    func_tok.leaveWhitespace()
+-    func_tok.setParseAction(parse_action)
+-    func_tok.enablePackrat()
++    func_tok = func_ident + original_text_for(nested_expr())('args')
++    func_tok.leave_whitespace()
++    func_tok.set_parse_action(parse_action)
++    func_tok.enable_packrat()
+ 
+     rx_tok = Combine(Literal('$').suppress() + Word(nums)('num'))
+ 
+@@ -224,16 +223,16 @@ def replace_token(tokens):
+         index = int(tokens.num)
+         return dictionary.get(index, '')
+ 
+-    rx_tok.setParseAction(replace_token)
++    rx_tok.set_parse_action(replace_token)
+ 
+     strip = lambda s, l, tok: tok[0].strip()
+-    text_tok = CharsNotIn(',').setParseAction(strip)
++    text_tok = CharsNotIn(',').set_parse_action(strip)
+     quote_tok = QuotedString('"')
+ 
+     if dictionary:
+-        arglist = Optional(delimitedList(quote_tok | rx_tok | text_tok))
++        arglist = Optional(delimited_list(quote_tok | rx_tok | text_tok))
+     else:
+-        arglist = Optional(delimitedList(quote_tok | text_tok))
++        arglist = Optional(delimited_list(quote_tok | text_tok))
+ 
+     return func_tok, arglist, rx_tok
+ 
+@@ -762,12 +761,12 @@ def what(s, loc, tok):
+             return "(.*)"
+         return "(.*?)"
+ 
+-    expression.setParseAction(what)
++    expression.set_parse_action(what)
+     global numtimes
+-    numtimes = len([z for z in expression.scanString(pattern)])
++    numtimes = len([z for z in expression.scan_string(pattern)])
+     if not numtimes:
+         return
+-    pattern = expression.transformString(pattern)
++    pattern = expression.transform_string(pattern)
+     try:
+         tags = re.search(pattern, text).groups()
+     except AttributeError:
+@@ -828,9 +827,9 @@ def reInit(self):
+         self.doc = self.function.__doc__.split("\n")
+ 
+         identifier = QuotedString('"') | Combine(Word(alphanums + ' !"#$%&\'()*+-./:;<=>?@[\\]^_`{|}~'))
+-        tags = delimitedList(identifier)
++        tags = delimited_list(identifier)
+ 
+-        self.info = [z for z in tags.parseString(self.doc[0])]
++        self.info = [z for z in tags.parse_string(self.doc[0])]
+ 
+     def setArgs(self, args):
+         self.args = args
+@@ -894,15 +893,15 @@ def description(self):
+ 
+     def _getControls(self, index=1):
+         identifier = QuotedString('"') | CharsNotIn(',')
+-        arglist = delimitedList(identifier)
++        arglist = delimited_list(identifier)
+         docstr = self.doc[1:]
+         if index:
+-            return [(arglist.parseString(line)[index]).strip()
++            return [(arglist.parse_string(line)[index]).strip()
+                     for line in docstr]
+         else:
+             ret = []
+             for line in docstr:
+-                ret.append([z.strip() for z in arglist.parseString(line)])
++                ret.append([z.strip() for z in arglist.parse_string(line)])
+             return ret
+ 
+     def setTag(self, tag):
+diff --git a/puddlestuff/tagsources/mp3tag/__init__.py b/puddlestuff/tagsources/mp3tag/__init__.py
+index 2a1a91ab..5d7c7302 100644
+--- a/puddlestuff/tagsources/mp3tag/__init__.py
++++ b/puddlestuff/tagsources/mp3tag/__init__.py
+@@ -35,8 +35,8 @@ def getnum(s, l, t):
+     return int(''.join(t))
+ 
+ 
+-STRING = QuotedString('"', '\\', unquoteResults=False).setParseAction(unquote)
+-NUMBER = Combine(Optional('-') + Word(nums)).setParseAction(getnum)
++STRING = QuotedString('"', '\\', unquote_results=False).set_parse_action(unquote)
++NUMBER = Combine(Optional('-') + Word(nums)).set_parse_action(getnum)
+ COVER = '#cover-url'
+ 
+ ARGUMENT = STRING | NUMBER
+@@ -153,7 +153,7 @@ def parse_func(lineno, line):
+     funcname = line.split(None, 1)[0].strip()
+     arg_string = line[len(funcname):]
+     args = (z[0]
+-            for z in ARGUMENT.searchString(arg_string).asList())
++            for z in ARGUMENT.search_string(arg_string).as_list())
+     args = [i.replace('\\\\', '\\') if isinstance(i, str) else i
+             for i in args]
+     if funcname and not funcname.startswith('#'):
+diff --git a/puddletag b/puddletag
+index c81f17ac..bbd7c834 100755
+--- a/puddletag
++++ b/puddletag
+@@ -125,7 +125,7 @@ def check_libs():
+              ('configobj', '(usually python3-configobj)',
+               'http://code.google.com/p/configobj/'),
+              ('pyparsing', '(python3-pyparsing or python3-parsing in most distros)',
+-              'http://pyparsing.wikispaces.com/'),
++              'https://github.com/pyparsing/pyparsing/'),
+              ('PyQt5', '(python3-pyqt5 usually)',
+               'http://www.riverbankcomputing.co.uk/software/pyqt/intro')]
+ 
+
+From c6f76f02749211eb3bed6ab0aeae441d9f1ebc64 Mon Sep 17 00:00:00 2001
+From: corubba <corubba@gmx.de>
+Date: Fri, 8 Mar 2024 16:20:49 +0100
+Subject: [PATCH 2/3] Improve packrat enablement
+
+It's a static method, so follow the upstream recommendation to a) call
+it on the class and b) shortly after the import.
+---
+ puddlestuff/audio_filter.py | 6 ++++--
+ puddlestuff/findfunc.py     | 6 ++++--
+ 2 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/puddlestuff/audio_filter.py b/puddlestuff/audio_filter.py
+index 96ce1598..cf3c8c38 100644
+--- a/puddlestuff/audio_filter.py
++++ b/puddlestuff/audio_filter.py
+@@ -2,7 +2,7 @@
+ import logging
+ import re
+ 
+-from pyparsing import (CaselessLiteral, Combine, OpAssoc,
++from pyparsing import (CaselessLiteral, Combine, OpAssoc, ParserElement,
+                        QuotedString, Word, alphanums, infix_notation)
+ 
+ 
+@@ -11,6 +11,9 @@
+ from .util import to_string
+ 
+ 
++ParserElement.enable_packrat()
++
++
+ def str_cmp(a, b):
+     if not isinstance(a, str):
+         a = '\\'.join(a)
+@@ -182,7 +185,6 @@ def __bool__(self):
+ tokens = QuotedString('"', unquote_results=False) \
+          | field_expr | Word(alphanums + '_')
+ bool_expr = infix_notation(tokens, bool_exprs)
+-bool_expr.enable_packrat()
+ 
+ 
+ def parse(audio, expr):
+diff --git a/puddlestuff/findfunc.py b/puddlestuff/findfunc.py
+index bd73bb62..88a68d12 100755
+--- a/puddlestuff/findfunc.py
++++ b/puddlestuff/findfunc.py
+@@ -8,7 +8,7 @@
+ from decimal import Decimal
+ from functools import partial
+ 
+-from pyparsing import (CharsNotIn, Combine, Literal, OneOrMore, Optional,
++from pyparsing import (CharsNotIn, Combine, Literal, OneOrMore, Optional, ParserElement,
+                        QuotedString, Word, alphanums, alphas, delimited_list, nested_expr,
+                        nums, original_text_for)
+ 
+@@ -30,6 +30,9 @@
+ KEYWORD_ARGS = set(['tags', 'm_tags', 'r_tags', 'state'])
+ 
+ 
++ParserElement.enable_packrat()
++
++
+ class ParseError(Exception):
+     def __init__(self, message):
+         Exception.__init__(self, message)
+@@ -215,7 +218,6 @@ def func_tokens(dictionary, parse_action):
+     func_tok = func_ident + original_text_for(nested_expr())('args')
+     func_tok.leave_whitespace()
+     func_tok.set_parse_action(parse_action)
+-    func_tok.enable_packrat()
+ 
+     rx_tok = Combine(Literal('$').suppress() + Word(nums)('num'))
+ 
+
+From 35414cc5492593b90302b4572f9497f9a625049c Mon Sep 17 00:00:00 2001
+From: corubba <corubba@gmx.de>
+Date: Thu, 21 Mar 2024 22:22:42 +0100
+Subject: [PATCH 3/3] Adjust requirement
+
+---
+ requirements.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/requirements.in b/requirements.in
+index 760035d2..5717e172 100644
+--- a/requirements.in
++++ b/requirements.in
+@@ -2,7 +2,7 @@
+ pyqt5==5.15.10
+ configobj==5.0.8
+ mutagen==1.47.0
+-pyparsing==3.1.2
++pyparsing>=3.0.0
+ unidecode==1.3.8
+ 
+ # extra / tag sources

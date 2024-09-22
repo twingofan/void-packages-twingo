@@ -1,6 +1,6 @@
 # Template file for 'puddletag'
 pkgname=puddletag
-version=2.2.0
+version=2.3.0
 revision=1
 build_style=python3-pep517
 hostmakedepends="python3-setuptools python3-wheel"
@@ -11,4 +11,4 @@ maintainer="Daniel Progrestian <progrestian@tuta.io>"
 license="GPL-3.0-or-later"
 homepage="https://github.com/puddletag/puddletag"
 distfiles="https://github.com/puddletag/puddletag/archive/${version}.tar.gz"
-checksum=fc26a9fcd842e3cd4b97ac83b9fdbd270d73f2a90285e47135e2719dcacc986a
+checksum=088860de9cfe91b761c95909d27ab763c9b9cbd30fd0f5e6cedf807cfb929bdd
