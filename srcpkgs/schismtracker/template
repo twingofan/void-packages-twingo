@@ -1,16 +1,16 @@
 # Template file for 'schismtracker'
 pkgname=schismtracker
-version=20240523
+version=20240909
 revision=1
 build_style=gnu-configure
-hostmakedepends="pkg-config autoconf-archive automake SDL2-devel python3 git libltdl-devel libflac-devel"
-makedepends="SDL2-devel"
+hostmakedepends="pkg-config autoconf-archive automake SDL2-devel python3 git"
+makedepends="SDL2-devel libutf8proc-devel"
 short_desc="Sample-based music composition tool"
 maintainer="Orphaned <orphan@voidlinux.org>"
 license="GPL-2.0-or-later"
 homepage="https://schismtracker.org"
 distfiles="https://github.com/schismtracker/schismtracker/archive/${version}.tar.gz"
-checksum=956e844c0da6ff57a97ee27a173cb07c9c9c550f24bce23a3525f37936ee4fb2
+checksum=3e29fb646e08ae210f027d1c8aaed4b6a0514b731202cb437a37b9685d40d6cd
 
 pre_configure() {
 	autoreconf -fi

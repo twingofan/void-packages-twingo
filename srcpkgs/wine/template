@@ -1,6 +1,6 @@
 # Template file for 'wine'
 pkgname=wine
-version=9.11
+version=9.17
 revision=1
 _pkgver=${version/r/-r}
 create_wrksrc=yes
@@ -13,17 +13,22 @@ license="LGPL-2.1-or-later"
 homepage="http://www.winehq.org/"
 distfiles="https://dl.winehq.org/wine/source/${version%.*}.x/wine-${_pkgver}.tar.xz
  https://github.com/wine-staging/wine-staging/archive/v${_pkgver}.tar.gz"
-checksum="dfa00c264ea71169d02a849a833e48cae761fb08422a00df8644ebd67bf87240
- 5edfa88452afd9a52dd9c978ec9ca6a713ad3d645d08d8baa318d35583e7a975"
+checksum="3edb7eb6f31bb5c3f7378dd5623da9d95f7d4d6d7c8378afd89c8e3a30aa080c
+ 8b75c8fe4802eb00084b7b7c274a9941f06b28ed6496efa612476b9760852392"
 
 # NOTE: wine depends on specific versions of wine-mono and wine-gecko,
 # check for updates to these packages when updating wine
 
-build_options="mingw staging xshm"
+build_options="mingw staging xshm wow64"
 build_options_default="mingw xshm"
 desc_option_mingw="Use the MinGW cross compiler to build WinPE DLLs"
 desc_option_staging="Apply the wine-staging patchset"
 desc_option_xshm="Enable support for the X Shared Memory Extension"
+
+
+if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
+	build_options_default+=" wow64"
+fi
 
 lib32mode=full
 archs="i686* x86_64*"
@@ -74,7 +79,7 @@ if [ "$XBPS_LIBC" = "glibc" ]; then
 	hostmakedepends+=" prelink"
 fi
 
-if [ "$XBPS_TARGET_LIBC" = "musl" ]; then
+if [ "${build_option_wow64}" ]; then
 	configure_args+=" --enable-archs=i386,x86_64"
 	makedepends+=" cross-i686-w64-mingw32"
 fi
@@ -88,6 +93,7 @@ fi
 
 post_patch() {
 	if [ "${build_option_staging}" ]; then
+		export PATH="/usr/libexec/chroot-git:${PATH}"
 		"../wine-staging-${_pkgver}/staging/patchinstall.py" --all
 	fi
 }
@@ -141,7 +147,6 @@ wine-devel_package() {
 
 wine-common_package() {
 	short_desc+=" - common files"
-	binfmts="/usr/bin/wine --magic MZ"
 	pkg_install() {
 		vmove usr/share
 		vmove etc/fonts
@@ -149,6 +154,12 @@ wine-common_package() {
 		do
 			vmove usr/bin/${file}
 		done
+		vmkdir usr/share/binfmts
+		cat <<- EOF >> "${PKGDESTDIR}"/usr/share/binfmts/wine
+		package wine
+		interpreter /usr/bin/wine
+		magic MZ
+		EOF
 	}
 }
 
