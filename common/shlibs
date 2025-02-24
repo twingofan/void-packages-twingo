@@ -457,7 +457,7 @@ libparted.so.2 libparted-3.1_1
 libparted-fs-resize.so.0 libparted-3.1_1
 libntfs-3g.so.89 ntfs-3g-2021.8.22_1
 libruby.so.3.3 ruby-3.3.2_1
-libada.so.2 ada-2.9.0_1
+libada.so.3 ada-3.1.0_1
 librw.so.0 rankwidth-0.9_1
 libKSysGuardFormatter.so.2 libksysguard-6.0.0_1
 libKSysGuardSensorFaces.so.2 libksysguard-6.0.0_1
@@ -572,10 +572,10 @@ libKF5PurposeWidgets.so.5 purpose-5.48.0_1
 libKF5Purpose.so.5 purpose-5.48.0_1
 libKF6PulseAudioQt.so.5 pulseaudio-qt-1.5_1
 libReviewboardHelpers.so.5 purpose-5.48.0_1
-libecpg_compat.so.3 postgresql-libs-16.1_1
-libecpg.so.6 postgresql-libs-16.1_1
-libpgtypes.so.3 postgresql-libs-16.1_1
-libpq.so.5 postgresql-libs-16.1_1
+libecpg_compat.so.3 postgresql-libs-17.1_1
+libecpg.so.6 postgresql-libs-17.1_1
+libpgtypes.so.3 postgresql-libs-17.1_1
+libpq.so.5 postgresql-libs-17.1_1
 libmypaint.so.0 libmypaint-1.6.1_1
 libgssapi_krb5.so.2 mit-krb5-libs-1.8_1
 libgssrpc.so.4 mit-krb5-libs-1.8_1
