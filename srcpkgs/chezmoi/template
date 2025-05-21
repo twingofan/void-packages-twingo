@@ -1,6 +1,6 @@
 # Template file for 'chezmoi'
 pkgname=chezmoi
-version=2.62.0
+version=2.62.4
 revision=1
 build_style=go
 go_import_path="github.com/twpayne/chezmoi/v2"
@@ -13,7 +13,7 @@ license="MIT"
 homepage="https://chezmoi.io/"
 changelog="https://github.com/twpayne/chezmoi/releases"
 distfiles="https://github.com/twpayne/chezmoi/archive/v${version}.tar.gz"
-checksum=d8f553d871d35caf3d446b6f1032f4cad81a75fc41955bd3d71216a2aa6e17a4
+checksum=ad2778fcfb9c3a6ad11c03ed20713f474c4c7830dbb1cc0641c36a1a9bb57ff6
 
 pre_build() {
 	local _date
