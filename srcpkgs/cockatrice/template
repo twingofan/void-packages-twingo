@@ -1,8 +1,8 @@
 # Template file for 'cockatrice'
 pkgname=cockatrice
-version=2.8.0
+version=2.10.2
 revision=1
-_reldate=2021-01-26
+_reldate=2025-04-03
 wrksrc="Cockatrice-${_reldate}-Release-${version}"
 build_style=cmake
 hostmakedepends="protobuf qt5-host-tools qt5-qmake"
@@ -12,4 +12,4 @@ maintainer="NuclearPine <nuclearpine.h3nbw@aleeas.com>"
 license="GPL-2.0-only"
 homepage="https://cockatrice.github.io"
 distfiles="https://github.com/Cockatrice/Cockatrice/archive/refs/tags/${_reldate}-Release-${version}.tar.gz"
-checksum=fbf908138e40b20529ebdc27b3b37d63891bf6a91f660be694407a8e57471e79
+checksum=73cabec34604261b3ec2beb66b6a11faff0b0d1ca50f25cc58a45325a39225d4
